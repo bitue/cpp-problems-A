@@ -6,7 +6,7 @@ using namespace std ;
 int main (){
 
     int arr[5]= {1, 5, 2, 3, 0};
-    sort(arr, arr+5);
+    sort(arr, arr+5); // sort(starting ptr , ending ptr )
     for(int i=0 ; i<5 ; i++){
         cout<<arr[i]<<" " <<endl;
     }
