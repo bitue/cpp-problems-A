@@ -234,9 +234,6 @@ int main (){
     Bank_Accout * my_acc ;
     Bkash_app *app_acc ;
 
-    print_options();
-
-
      my_acc = create_account();
     app_acc = new Bkash_app();
 
