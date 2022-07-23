@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std ;
 
-class Bank_Accout {
+class Bank_Accout  {
 public :
     string accout_holder ;
     int age ;
@@ -82,6 +82,8 @@ public :
     }
 
 
+
+
     friend class Bkash_app ;
 
 
@@ -124,6 +126,28 @@ public :
             cout<<"password didnot matched !!"<<endl;
         }
 
+
+    }
+
+
+
+
+
+};
+
+class Nominee_account : public Bank_Accout {
+
+public :
+    string name ;
+
+    Nominee_account(string n ){
+        this->name = n ;
+    }
+
+    void add_money_by_nominee(int ammount) {
+
+        this->account_balance +=ammount ;
+        cout<<"successfully added to Bank account by Nominee"<<endl;
 
     }
 
@@ -221,6 +245,8 @@ void print_options () {
     cout<<endl;
     cout<<"5=> App Balance quick"<<endl;
     cout<<endl;
+    cout<<"6=> Create Nominee"<<endl;
+    cout<<endl;
     cout<<"0=> Quit "<<endl;
 
 
@@ -229,13 +255,24 @@ void print_options () {
 
 }
 
+Nominee_account * make_nominee (string name) {
+
+     Nominee_account *my_nominee  = new Nominee_account (name) ;
+     return my_nominee ;
+
+
+
+}
+
+void nominee_to_bank_add_money ( Nominee_account *n_acc , int ammount) {
+
+    n_acc->add_money_by_nominee(ammount);
+}
+
 int main (){
 
     Bank_Accout * my_acc ;
     Bkash_app *app_acc ;
-
-    print_options();
-
 
      my_acc = create_account();
     app_acc = new Bkash_app();
@@ -276,9 +313,38 @@ int main (){
         if(i==5) {
                 cout<<"app balance is  "<<app_acc->get_app_balance()<<endl;
         }
+        if(i==6) {
+
+            cout<<"Enter Nominee Name "<<endl;
+            string name ;
+            cin>>name ;
+            Nominee_account *nominee_acc =  make_nominee(name);
+
+            cout<<"Make Deposit by Nominee Y or N" <<endl;
+            string ch ;
+            cin<<ch;
+            if(ch=="Y") {
+                cout<<"How Much Ammount you need to add " <<endl;
+
+                int tk ;
+
+                cin>>tk ;
+
+                nominee_to_bank_add_money(nominee_acc , tk);
+
+
+
+            }
+            else {
+                continue ;
+            }
+
+
+        }
     }
     cout<<endl;
 
 
 
 }
+
