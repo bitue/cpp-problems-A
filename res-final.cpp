@@ -15,9 +15,9 @@ public :
     }
 
     void display_board (){
-        cout<<"item code                     item name                              item price :"<<endl;
+        cout<<"item code\t\titem name \t\t item price :"<<endl;
         for(int i=0 ; i<12 ; i++) {
-        cout<<this->food_items_codes[i]<<"                     "<<this->food_items_names[i]<<"                             "<<this->food_items_prices[i]<<endl;
+        cout<<this->food_items_codes[i]<<" \t\t "<<this->food_items_names[i]<<" \t\t"<<this->food_items_prices[i]<<endl;
         }
 
 
@@ -77,7 +77,7 @@ void take_input_table(Restaurant *res , int *codes , int * qty, int items) {
 
         while(!check_code(res, codes[i])) {
 
-            cout<<"Your code "
+            cout<<"Your Food code is invalid ...need"<<endl;
             cout<<"Enter the Item "<<i+1<<" code Again:"<<endl;
             cin>>codes[i];
 
@@ -89,9 +89,7 @@ void take_input_table(Restaurant *res , int *codes , int * qty, int items) {
 
     }
 
-    for(int i=0 ; i<items ; i++){
-        cout<<codes[i]<<endl;
-    }
+
 
 
 }
@@ -110,11 +108,6 @@ void code_to_price_array (Restaurant * res, int *codes , int *prices, int items,
         }
     }
 
-    // need to check the price arr
-
-    for(int i =0 ; i<items ; i++){
-        cout<<prices[i]<<endl;
-    }
 
 
 
@@ -126,22 +119,24 @@ void bill_function_final (Restaurant * res , int *prices , int *qty , int *codes
     float bill =0 ;
     float tax = 0;
 
+    cout << "_________________________________________________________________________________" << endl;
+    cout<<"FINAL BILL OF Table "<<table_no<<endl;
 
-    cout<<"FINAL BILL OF "<<table_no<<endl;
 
-
-    cout<<"Item code :                            Item Name :                      Item Price :              item Quantity                Total price :"<<endl;
+    //cout<<"Item code :\t\t Item Name :\t\t Item Price :\t\t item Quantity \t\t Total price :"<<endl;
+     cout << "Item Code\tItem Name\t\tItem Price\tItem Quantity\tTotal Price" << endl;
     for(int i =0 ; i<items ; i++){
         bill+=prices[i]*qty[i] ;
 
-    cout<<codes[i]<<"                            "<<foods[i]<<"                      "<<prices[i]<<"              "<<qty[i]<<"                "<<prices[i]*qty[i]<<endl;
+    cout<<codes[i]<<"\t\t"<<foods[i]<<"\t"<<prices[i]<<" \t\t "<<qty[i]<<" \t\t"<<prices[i]*qty[i]<<endl;
+    // cout << code << "\t\t" << name << "\t" << price << "\t\t" << quantity << "\t\t" << total << endl;
     }
 
     tax = bill * 0.05 ;
     res->tax = res->tax + tax ;
-    cout<<"tax :(5% tax )                                                                                                                    "<<tax<<endl ;
-    cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
-    cout<<" Total bill : (Included tax )                                                                                                        "<<bill + tax<<endl;
+    cout<<"tax :(5% tax ) \t\t\t\t\t\t\t "<<tax<<endl ;
+    cout<<"----------------------------------------------------------------------------------------------------------------------"<<endl;
+    cout<<" Total bill : (Included tax ) \t\t\t\t\t\t\t"<<bill + tax<<endl;
 
 
 
@@ -196,28 +191,10 @@ int main (){
         // need to bill Function
         bill_function_final (res, prices , food_qty, food_codes, items, table_num, food_names);
 
-       // cout<<"tax value "<<res->tax<<endl;
-
-
-
-
-
-
-
-
-
-
-
+    // cout<<"tax value  now:::::::::::::::::: "<<res->tax<<endl;
 
 
     }
-
-
-
-
-
-
-
 
 
 
