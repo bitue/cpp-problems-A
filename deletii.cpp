@@ -16,6 +16,10 @@ int main (){
     int arr[10] ;
     int n , pos ;
     cin>>n >>pos ;
+    if(pos <0 || pos > n-1){
+        cout<<"INVALID"<<endl;
+        return 0;
+    }
 
     for(int i=0 ; i<n ; i++){
         cin>>arr[i];

@@ -6,5 +6,5 @@ int main (){
 
     string s ;
     cin>>s ;
-    cout<<"hello "<<s<<endl;
+    cout<<"hell "<<s<<endl;
 }
