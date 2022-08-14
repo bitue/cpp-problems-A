@@ -29,6 +29,8 @@ int main (){
             }
         }
 
+        
+
         // curr
 
         // find the max idx

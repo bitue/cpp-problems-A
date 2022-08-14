@@ -3,6 +3,8 @@ using namespace std ;
 
 class Restaurant {
 public :
+    
+
     int food_items_codes[12];
     string food_items_names[12];
     int food_items_prices[12];

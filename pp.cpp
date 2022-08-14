@@ -12,10 +12,6 @@ public :
 void display (Node * n) {
 
     while(n!=nullptr) {
-
-
-
-
         cout<<"Address Link value :"<<n->Next<<"  => " <<"Value : "<<n->value <<endl ;
           n = n->Next ;
     }
@@ -44,12 +40,6 @@ int main (){
     third ->Next = NULL ;
 
     // define f_node
-
-
-
-
-
-
     // display the liked list value ;
 
     display(first);
