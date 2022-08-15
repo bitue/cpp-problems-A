@@ -52,7 +52,7 @@ void print_all_node_values (Node *n ) {
     }
     while(n ->next !=  nullptr){
         
-        cout<<n->value<<"->";
+        cout<<n->value<<"-> ";
         // update the n value 
         n = n->next ;
         
@@ -204,21 +204,46 @@ void delete_head (Node *&head) {
    
 }
 
-void delete_tail (Node *head) {
+void delete_tail (Node *&head) {
     Node *temp = head ;
     if(head == NULL){
         cout<<"There is no value in linked list yet !!"<<endl;
     }
+    else if(temp->next == NULL){
+       delete_head(head);
+    }
+   
     else {
         while(temp->next->next != NULL){
         temp = temp->next ;
         }
         Node *dellNode = temp->next ;
-        temp->next = NULL ;
+        temp->next = NULL ; 
         delete dellNode ;
 
     }
    
+}
+
+void delete_at_specific_pos (Node *&head , int pos){
+    Node *temp = head ;
+    if(temp == NULL){
+        cout<<"Linked list is empty"<<endl;
+    }
+    else if (pos ==1){
+        delete_head(head);
+    }
+    else {
+        for(int i=1 ; i<pos-1 ; i++){
+        temp = temp->next ;
+
+        }
+        Node * dellNode = temp->next ;
+        temp->next = dellNode->next ;
+        delete dellNode ;
+
+    }
+    
 }
 
 
@@ -229,14 +254,17 @@ int main (){
     cout<<"Choice 0 to exit"<<endl
         <<"1 to head insert"<<endl
         <<"2 to tail insert"<<endl
-        <<"3 to specific position"<<endl
+        <<"3 insert to specific position"<<endl
         <<"4 to find value"<<endl
         <<"5 to find the value in duplicate list"<<endl
         <<"6 to find the value in duplicate list (array)"<<endl
         <<"7 to find the value in duplicate list (structure)"<<endl
         <<"8 to insert a value to the specific value "<<endl
         <<"9 delete at head  "<<endl
-        <<"10 delete at tail  "<<endl;
+        <<"10 delete at tail  "<<endl
+        <<"11 delete at specific position "<<endl
+        <<"12 delete at specific value"<<endl;
+
     cin>>ch ;
 
     Node * head = nullptr ;
@@ -350,6 +378,30 @@ int main (){
         }
         else if (ch ==10){
             delete_tail(head);
+        }
+        else if (ch ==11){
+            int pos ;
+            cout<<"Enter the position u want to delete"<<endl;
+            cin>>pos ;
+            delete_at_specific_pos(head, pos);
+
+        }
+
+        else if(ch == 12) {
+            int val ;
+            cout<<"Enter the value you want to delete"<<endl;
+            cin>>val ;
+            // find the pos of this value 
+            int pos = search_value_unique(head , val);
+            if(pos==-1){
+                cout<<"Not found that value"<<endl;
+            }
+            // delete the pos value by build in fun 
+            else {
+                delete_at_specific_pos(head, pos);
+            }
+           
+
         }
        
         cout<<"enter the choice again "<<endl;
