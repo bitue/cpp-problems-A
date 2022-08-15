@@ -15,6 +15,12 @@ class Node {
 
 };
 
+struct Output_arr {
+   int sz ;
+   int poses[1000];
+};
+
+
 void insert_at_tail(Node *&head , int val) {
     Node *newNode = new Node(val);
 
@@ -160,6 +166,61 @@ void find_val_arr (Node * head , int val){
 
 }
 
+Output_arr find_val_return_struct (Node *head , int val){
+  //  int size = print_length_of_linked_list(head);
+    // init the structure 
+    Output_arr out ;
+  
+    out.poses[0]= 0 ;
+    int k=1 ;
+    int pos = 1 ;
+
+    while(head != NULL){
+        if(head->value == val){
+            out.poses[k]=pos ;
+            k++ ;
+        }
+        head = head->next ;
+        pos ++;
+
+    }
+      out.sz = k ;
+
+    return out ;
+
+
+}
+
+
+void delete_head (Node *&head) {
+    if(head == NULL){
+        cout<<"There is no value in linked list yet !!"<<endl;
+    }
+    else {
+        Node *temp = head ;
+        head = temp->next ; // we need to update the head value so we need pointer ka address hae 
+        delete temp ;
+    }
+   
+}
+
+void delete_tail (Node *head) {
+    Node *temp = head ;
+    if(head == NULL){
+        cout<<"There is no value in linked list yet !!"<<endl;
+    }
+    else {
+        while(temp->next->next != NULL){
+        temp = temp->next ;
+        }
+        Node *dellNode = temp->next ;
+        temp->next = NULL ;
+        delete dellNode ;
+
+    }
+   
+}
+
 
 
 int main (){
@@ -171,7 +232,11 @@ int main (){
         <<"3 to specific position"<<endl
         <<"4 to find value"<<endl
         <<"5 to find the value in duplicate list"<<endl
-        <<"6 to find the value in duplicate list (array)" ;
+        <<"6 to find the value in duplicate list (array)"<<endl
+        <<"7 to find the value in duplicate list (structure)"<<endl
+        <<"8 to insert a value to the specific value "<<endl
+        <<"9 delete at head  "<<endl
+        <<"10 delete at tail  "<<endl;
     cin>>ch ;
 
     Node * head = nullptr ;
@@ -236,6 +301,55 @@ int main (){
             find_val_arr(head, val);
 
 
+        }
+
+        else if (ch == 7 ) {
+            cout<<"Enter tha value for search (Duplicated) array"<<endl;
+            int val ;
+            cin>>val ;
+            Output_arr res  = find_val_return_struct(head , val);
+            if(res.sz ==1){
+                cout<<"Not found yet !!"<<endl;
+            }
+            else {
+                for(int i =1 ; i< res.sz ; i++ ){
+                cout<<res.poses[i]<<" ";
+                }
+            }
+
+            
+            
+            
+
+
+        }
+
+        else if(ch ==8){
+            cout<<"Enter the value you want to insert"<<endl;
+            int value ;
+            cin>>value ;
+            cout<<"Enter the specific value , after you insert"<<endl;
+            int search_value ;
+            cin>>search_value;
+            // find the position of the search value 
+            int pos = search_value_unique(head , search_value);
+            if(pos == -1){
+                cout<<"the value is not found"<<endl ;
+            }
+            else {
+                // insert the pos +1 at 
+                add_to_specific_pos(head , pos+1 , value);
+            }
+
+           
+
+
+        }
+        else if(ch==9){
+            delete_head(head);
+        }
+        else if (ch ==10){
+            delete_tail(head);
         }
        
         cout<<"enter the choice again "<<endl;
