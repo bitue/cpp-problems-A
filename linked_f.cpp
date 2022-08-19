@@ -246,6 +246,102 @@ void delete_at_specific_pos (Node *&head , int pos){
     
 }
 
+Node * reverse_linked_list(Node *&head ){
+    Node *prevNode = NULL ;
+    Node * currNode = head ;
+    Node *nextNode = head->next ;
+    if(head == NULL){
+        return head ;
+    }
+    
+    while(true){
+        currNode->next = prevNode ;
+        prevNode = currNode ;
+        currNode= nextNode ;
+        if(currNode == NULL){
+            break;
+        }
+        nextNode = nextNode->next ;
+
+    }
+    return prevNode ;
+
+    
+}
+
+int find_mid (Node *&head ) {
+    Node * slow = head ;
+    Node *fast = head ;
+
+    while(fast!=NULL && fast->next != NULL){
+        slow = slow->next ;
+        fast= fast->next->next ;
+
+    }
+
+    return slow->value ;
+}
+
+void make_cycle (Node *&head , int pos ){
+    Node *temp = head ;
+    Node *startNode = NULL ;
+    int co = 0 ;
+
+    while(temp->next != NULL){
+        co++;
+        if(co == pos){
+           startNode = temp ;
+
+        }
+        temp= temp->next ;
+      
+
+    }
+
+    temp->next = startNode ;
+
+}
+
+bool detect_cycle (Node *&head ) {
+    Node * slow = head ;
+    Node *fast = head ;
+
+    while(fast!=NULL && fast->next != NULL){
+        slow = slow->next ;
+        fast= fast->next->next ;
+
+        // check for cycle 
+        if(slow == fast) {
+            return true ;
+
+        }
+
+    }
+    return false ;
+}
+
+void removal_of_cycle (Node *&head) {
+    Node *slow = head ;
+    Node *fast = head ;
+
+    while(fast != NULL && fast->next != NULL){
+        fast = fast->next->next ;
+        slow = slow->next ;
+        if(slow== fast){
+            slow = head ;
+            while(slow->next != fast->next){
+                slow= slow->next;
+                fast= fast->next ;
+            }
+            fast->next = NULL ;
+            return ;
+        }
+    }
+
+}
+
+
+
 
 
 int main (){
@@ -263,7 +359,17 @@ int main (){
         <<"9 delete at head  "<<endl
         <<"10 delete at tail  "<<endl
         <<"11 delete at specific position "<<endl
-        <<"12 delete at specific value"<<endl;
+        <<"12 delete at specific value"<<endl
+        <<"13 delete at specific value (Duplicated enabled linked list)"<<endl
+        <<"14 insert at specific value (Duplicated enabled linked list)"<<endl
+        <<"15 reverse a linked list "<<endl
+        <<"16 Linked list cycle formed at spec pos "<<endl
+        <<"17 find the mid value  "<<endl
+        <<"18 Detect cycle in the list  "<<endl
+        <<"19 Removal cycle status  "<<endl
+        <<"20 print the linked list "<<endl;
+
+
 
     cin>>ch ;
 
@@ -403,6 +509,102 @@ int main (){
            
 
         }
+
+        else if(ch == 13) {
+            int val ;
+            cout<<"Enter the value "<<endl;
+            cin>>val ;
+            Output_arr res ;
+            res = find_val_return_struct(head , val);
+            // find the pos array 
+            // for(int i =1 ; i<res.sz ; i++){
+            //     cout<<res.poses[i]<<" ";
+            // }
+            int size = res.sz ;
+            int co =0 ;
+
+            for(int i =1 ; i<size ; i++){
+
+                delete_at_specific_pos(head, res.poses[i]-co);
+                co++ ;
+
+            }
+
+        }
+        else if(ch == 14) {
+            int val ;
+            cout<<"Enter the value "<<endl;
+            cin>>val ;
+           
+
+            Output_arr res ;
+            res = find_val_return_struct(head , val);
+            // find the pos array 
+            // for(int i =1 ; i<res.sz ; i++){
+            //     cout<<res.poses[i]<<" ";
+            // }
+            int size = res.sz ;
+            int co =0 ;
+            for(int i =1 ; i<size ; i++){
+
+                add_to_specific_pos(head, res.poses[i]+co , val );
+                co++ ;
+
+            }
+
+            
+        }
+
+        else if (ch == 15) {
+            head = reverse_linked_list(head);
+          
+        }
+
+        else if(ch == 16){
+
+            int pos ;
+            cout<<"position say "<<endl;
+            cin>>pos;
+            make_cycle(head, pos);
+
+
+        }
+
+        else if(ch == 17 ){
+            int res = find_mid(head);
+            cout<<"Mid value is : "<<res<<endl;
+        }
+
+        else if(ch == 18){
+
+            bool res = detect_cycle(head);
+            if(res) {
+                cout<<"Cycle present "<<endl;
+            }
+            else {
+                cout<<"No cycle "<<endl;
+            }
+
+        }
+
+        else if(ch == 19){
+            bool res = detect_cycle(head);
+            if(res) {
+                // removal cycle fun 
+                removal_of_cycle(head);
+                cout<<"Removal is done ..... print all "<<endl<<endl;
+                print_all_node_values(head);
+            }
+            else {
+                cout<<"No cycle "<<endl;
+            }
+        }
+
+        else if(ch == 20) {
+            
+            print_all_node_values(head);
+
+        }
        
         cout<<"enter the choice again "<<endl;
         cin>>ch ;
@@ -412,7 +614,7 @@ int main (){
 
     cout<<"Done inserting on Linked List"<<endl
         <<"Print it"<<endl;
-    print_all_node_values(head);
+   
     cout<<endl;
     cout<<"length is "<<print_length_of_linked_list(head)<<endl;
 
