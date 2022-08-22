@@ -110,6 +110,7 @@ void reverse_display (DoublyNode *&head){
 int main (){
 
     int ch ;
+
     cout<<"Choice 0 to exit"<<endl
         <<"1 to head insert at tail"<<endl
         <<"2 print the length"<<endl
@@ -147,6 +148,7 @@ int main (){
         else if(ch== 5){
             reverse_display(head);
         }
+        cout<<endl;
 
         cout<<"Enter the choice "<<endl;
         cin>>ch;

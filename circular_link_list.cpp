@@ -68,7 +68,7 @@ int main (){
         <<"1 for insert at head "<<endl
         <<"2 for insert at tail "<<endl
         <<"3 for print all nodes "<<endl
-         <<"4 count length "<<endl;
+        <<"4 count length "<<endl;
         
     int ch ;
     cout<<"Enter the choice "<<endl;

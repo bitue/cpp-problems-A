@@ -45,15 +45,26 @@ void display (Node *head){
 
 int find_mid (Node *&head ){
     Node *slow = head ;
-    Node *fast = head ;
+    Node *fast = head->next ;
+    while(true){
+        if(fast->next != NULL){
+            if(fast->next->next != NULL){
+                fast= fast->next->next ;
+                slow= slow->next ;
 
-    while(fast->next != NULL && fast != NULL){
-        fast = fast->next->next ;
-        slow= slow->next ;
+            }
+            else {
+                return slow->value ;
+            }
+
+        }
+        else {
+            return slow->value ;
+        }
+
+        
+
     }
-
-    return slow->value ;
-   
 
 }
 
@@ -81,10 +92,10 @@ int main(){
     }
     display(head);
 
-   // find the mid value 
-    int res = find_mid(head);
-    cout<<endl;
-    cout<<res<<endl;
+    // find the mid value 
+    // int res = find_mid(head);
+    // cout<<endl;
+    // cout<<res<<endl;
 
     
 

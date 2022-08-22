@@ -1,2 +1,2 @@
- cout<<"out"<<endl;
-    cout<<temp->value<<"temp ka value"<<endl;
+   // print_all_node_values(head);
+    // cout<<endl;

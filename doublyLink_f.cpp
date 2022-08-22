@@ -196,7 +196,7 @@ void deletion_at_pos (DoubleLink *&head , int pos){
         return ;
     }
     for(int i=1 ; i<pos-1 ; i++){
-         cout<<"for"<<endl;
+    
         temp= temp->next ;
     }
    
@@ -362,7 +362,7 @@ int main (){
             cout<<"Enter the deleted value"<<endl;
             cin>>val;
             int pos = search_value(head, val);
-            cout<<"pos : "<<pos<<endl;
+          
             deletion_at_pos(head, pos);
 
 
